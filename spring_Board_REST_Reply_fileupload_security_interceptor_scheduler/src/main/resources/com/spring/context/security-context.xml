@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<http pattern="/resources/**" security="none" />
+	
+	<authentication-manager id="memberAuthManager">
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query=
+					"select id as username, pwd as password, 
+					 	useyn as enabled 
+					 from users
+					 where id=?"			
+				authorities-by-username-query=
+					"select id as username, authority
+					 from authorities
+					 where id=?"
+			/>		
+		</authentication-provider>
+	</authentication-manager>
+	
+	<http  pattern="/**" use-expressions="true" 
+		  authentication-manager-ref="memberAuthManager">
+		   
+		<access-denied-handler error-page="/security/accessDenied"/>		
+		<intercept-url pattern="/commons/log*" access="permitAll"/>
+		<intercept-url pattern="/member/list" access="isAuthenticated()"/>
+		<intercept-url pattern="/member/detail" access="isAuthenticated()"/>
+		<intercept-url pattern="/member/**" access="hasAuthority('ROLE_ADMIN')"/>
+		<intercept-url pattern="/sboard/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/replies/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/log/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/**" access="permitAll"/>		
+	
+	
+		<form-login		
+			login-page="/commons/loginForm" 
+			login-processing-url="/commons/login"			
+			username-parameter="id"
+			password-parameter="pwd"
+			authentication-success-handler-ref=
+						"loginSuccessSecurityHandler"
+			authentication-failure-handler-ref=
+						"loginFailureSecurityHandler"				
+		/>
+		<logout 
+		
+			logout-url="/commons/logout"
+			invalidate-session="true"
+			logout-success-url="/commons/loginForm"
+		/>
+		
+	</http>
+	
+	<beans:bean id="loginSuccessSecurityHandler"
+				class="com.spring.security.LoginSuccessSecurityHandler"
+				p:defaultTargetUrl="/member/list"
+				/>
+	<beans:bean id="loginFailureSecurityHandler"
+				class="com.spring.security.LoginFailureSecurityHandler"
+				p:defaultFailureUrl="/commons/loginForm"
+				p:useForward="true"
+				/>
+	
+</beans:beans>
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jaejik_A4" pageWidth="515" pageHeight="842" columnWidth="475" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9f449b75-51f5-4f20-950d-76435c543fc1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ORACLE Data Adapter "/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="497"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="489"/>
+	<parameter name="id" class="java.lang.String">
+		<parameterDescription><![CDATA[회원 아이디]]></parameterDescription>
+	</parameter>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM "USERS" WHERE "USERS"."ID" = $P{id}]]>
+	</queryString>
+	<field name="ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ID"/>
+	</field>
+	<field name="PWD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PWD"/>
+	</field>
+	<field name="USEYN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="USEYN"/>
+	</field>
+	<field name="NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NAME"/>
+	</field>
+	<field name="EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EMAIL"/>
+	</field>
+	<field name="REGDATE" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="REGDATE"/>
+	</field>
+	<field name="LASTACCESSTIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="LASTACCESSTIME"/>
+	</field>
+	<background>
+		<band height="580" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="480" height="580" uuid="d2387a95-47d8-443a-a46e-e7aa02e9f2a5"/>
+				<imageExpression><![CDATA[$P{imagePath}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="168" y="164" width="170" height="20" uuid="b9c25b32-e7ea-44fe-a723-98d6c187e963"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="맑은 고딕" size="12" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[강력반]]></text>
+			</staticText>
+			<textField pattern="yyyy">
+				<reportElement x="119" y="461" width="80" height="20" uuid="6b21b449-91f8-4e90-a103-8394ad3d84fa"/>
+				<textElement textAlignment="Right">
+					<font fontName="맑은 고딕" size="12" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM">
+				<reportElement x="213" y="461" width="25" height="20" uuid="aa5db198-7fe6-49a8-b403-fd81146b1bb5"/>
+				<textElement textAlignment="Right">
+					<font fontName="맑은 고딕" size="12" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd">
+				<reportElement x="252" y="461" width="25" height="20" uuid="ee4a620e-9870-4fe5-b13b-1596ba32b4f5"/>
+				<textElement textAlignment="Right">
+					<font fontName="맑은 고딕" size="12" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="70" width="83" height="20" uuid="7b5854ad-d889-4b71-b046-05e65e6599ac"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="맑은 고딕" size="12" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="80" width="89" height="25" uuid="8b5761f2-4eb9-4305-894c-abb64c16c516"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="맑은 고딕" size="12" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PWD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="196" width="100" height="20" uuid="2ae068ce-41f9-4bd7-80fd-bd520e02ea52"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="맑은 고딕" size="12" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMAIL}==null ? "해당없음":$F{EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="169" y="228" width="91" height="19" uuid="14f8aec8-8669-4f4b-958a-302a286ff4ef"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="맑은 고딕" size="11" isBold="true" pdfFontName="com/spring/jrxml/fonts/MALGUN.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy년MM월dd일").format($F{REGDATE})]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+</jasperReport>

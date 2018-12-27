@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	
+	<!-- <bean id="printHello" class="com.spring.process.PrintHello" 
+		  
+	/>
+	
+	<bean id="printMorning" class="com.spring.process.PrintMorning" />
+	
+	<bean id="printMessage1" class="com.spring.process.PrintMessage"
+		  p:printHello-ref="printMorning"
+	 />
+	 
+	 <bean id="printMessage2" class="com.spring.process.PrintMessage"
+	 	   p:printHello-ref="printHello" 
+	 /> -->
+	<context:component-scan base-package="com.spring" />
+	
+	<bean id="dataSource"
+	      class="org.apache.commons.dbcp2.BasicDataSource"
+	      p:driverClassName="oracle.jdbc.driver.OracleDriver"
+	      p:url="jdbc:oracle:thin:@localhost:1521:XE"
+	      p:username="nonage"
+	      p:password="nonage"
+	      />
+	      
+	<bean id="sqlSessionFactory"
+	      class="org.mybatis.spring.SqlSessionFactoryBean"
+	      p:dataSource-ref="dataSource"
+	      p:configLocation="classpath:com/spring/dataSource/mybatis-sqlConfig.xml"
+	      p:mapperLocations="classpath:com/spring/dataSource/*-Mapper.xml"
+	      />
+
+	<bean id="sqlSession"
+	      class="org.mybatis.spring.SqlSessionTemplate"
+	      c:sqlSessionFactory-ref="sqlSessionFactory"
+	      />
+	      
+	<bean id="productDAO"
+		  class="com.spring.dao.ProductDAOImpl"
+		  p:session-ref="sqlSession"
+		  />
+		  
+	
+</beans>
+
+
+
+
+
+
+
+

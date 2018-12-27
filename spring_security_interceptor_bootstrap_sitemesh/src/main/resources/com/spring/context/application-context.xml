@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	
+	<bean id="memberDAO"
+		  class="com.spring.dao.MemberDAOImpl"
+		  p:sqlSession-ref="sqlSession"
+		  />
+	<bean id="memberService"
+		  class="com.spring.service.MemberServiceImpl"
+		  p:memberDAO-ref="memberDAO"
+		  />
+	<bean id="exporterService"
+	      class="com.spring.service.ExporterServiceImpl"
+	      />
+	<bean id="jaejikReportView"
+		  class="com.spring.view.JaejikReportView"
+		  p:dataSource-ref="dataSource"
+		  p:exporter-ref="exporterService"
+		  />
+	<bean id="memberListReportView"
+		  class="com.spring.view.MemberListReportView"
+		  p:dataSource-ref="dataSource"
+		  p:exporter-ref="exporterService"
+		  />
+</beans>
+
+
+
+
+
+
+

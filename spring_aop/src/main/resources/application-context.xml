@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+	
+	<bean id="행동"
+	      class="com.spring.behavior.행동하기"
+	      />
+	<bean id="양치하기"
+	      class="com.spring.advice.양치하기"
+	      />
+	
+	
+	<aop:config>
+		<aop:aspect id="이가썩지않는방법" ref="양치하기">
+			<aop:pointcut 
+				expression="execution(public * com.spring.behavior..잠자기*(..))"
+				id="잠자기"/>
+			<aop:pointcut 
+				expression="execution(public * com.spring.behavior..식사*(..))" 
+				id="식사하기"/>
+			
+			<aop:before method="chikachika" pointcut-ref="잠자기"/>
+			<aop:after method="chikachika" pointcut-ref="식사하기"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
+
+
+
+
+
+
+
